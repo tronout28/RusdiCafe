@@ -1,5 +1,10 @@
 package App;
 
-public class Laporan {
+import java.util.Scanner;
+import java.util.ArrayList;
 
+public class Laporan {
+    public void testLaporan() {
+        System.out.println("Laporan class is working!");
+    }
 }

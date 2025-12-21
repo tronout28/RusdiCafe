@@ -1,6 +1,7 @@
 import App.Auth;
 import App.Laporan;
 import App.Menu;
+import App.Transaksi;
 import java.util.Scanner;
 
 public class Main {
@@ -8,14 +9,14 @@ public class Main {
     private Scanner scan;
     private Auth auth;
     private Menu menu;
-    // private Transaksi transaksi;
+    private Transaksi transaksi;
     private Laporan laporan;
 
     public Main() {
         scan = new Scanner(System.in);
         auth = new Auth();
         menu = new Menu();
-        // transaksi = new Transaksi();
+        transaksi = new Transaksi();
         laporan = new Laporan();
     }
 
@@ -33,24 +34,22 @@ public class Main {
             tampilMenuUtama();
             pilihan = scan.nextInt();
 
-            System.out.println("login berhasil");
-
-            // switch (pilihan) {
-            //     case 1:
-            //         transaksi.Kasir();
-            //         break;
-            //     case 2:
-            //         menu.menus();
-            //         break;
-            //     case 3:
-            //         laporan.testLaporan();
-            //         break;
-            //     case 0:
-            //         System.out.println("Terima kasih, program selesai.");
-            //         break;
-            //     default:
-            //         System.out.println("Pilihan tidak valid!");
-            // }
+            switch (pilihan) {
+                case 1:
+                    transaksi.Kasir();
+                    break;
+                case 2:
+                    menu.menus();
+                    break;
+                case 3:
+                    laporan.Laporan();
+                    break;
+                case 0:
+                    System.out.println("Terima kasih, program selesai.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid!");
+            }
 
             System.out.println();
         } while (pilihan != 0);

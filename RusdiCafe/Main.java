@@ -1,25 +1,73 @@
-import java.util.ArrayList;
+import java.util.Scanner;
+
 
 import App.Auth;
 import App.Menu;
-import App.Kasir;
 import App.Transaksi;
 import App.Laporan;
 
 public class Main {
-public static void main(String[] args) {
 
-    Auth auth = new Auth();
-    Menu menu = new Menu();
-    Kasir kasir = new Kasir();
-    Transaksi transaksi = new Transaksi();
-    Laporan laporan = new Laporan();
+    private Scanner scan;
+    private Auth auth;
+    private Menu menu;
+    private Transaksi transaksi;
+    private Laporan laporan;
 
-    auth.testAuth();
-    menu.testMenu();
-    kasir.testKasir();
-    transaksi.testTransaksi();
-    laporan.testLaporan();
+    public Main() {
+        scan = new Scanner(System.in);
+        auth = new Auth();
+        menu = new Menu();
+        transaksi = new Transaksi();
+        laporan = new Laporan();
+    }
 
+    public void run() {
+
+        if (!auth.login()) {
+            System.out.println("Login gagal! Program dihentikan.");
+            return;
+        }
+
+        System.out.println("Login berhasil!\n");
+
+        int pilihan;
+        do {
+            tampilMenuUtama();
+            pilihan = scan.nextInt();
+
+            switch (pilihan) {
+                case 1:
+                    transaksi.Kasir();
+                    break;
+                case 2:
+                    menu.menus();
+                    break;
+                case 3:
+                    laporan.testLaporan();
+                    break;
+                case 0:
+                    System.out.println("Terima kasih, program selesai.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid!");
+            }
+
+            System.out.println();
+        } while (pilihan != 0);
+    }
+
+    private void tampilMenuUtama() {
+        System.out.println("=== MENU UTAMA ===");
+        System.out.println("1. Kasir");
+        System.out.println("2. Menu");
+        System.out.println("4. Laporan");
+        System.out.println("0. Keluar");
+        System.out.print("Pilih menu: ");
+    }
+
+    public static void main(String[] args) {
+        Main app = new Main(); 
+        app.run();            
     }
 }

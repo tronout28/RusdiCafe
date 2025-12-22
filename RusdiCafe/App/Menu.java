@@ -14,11 +14,10 @@ public class Menu {
     private static ArrayList<Menu> daftarMenu = new ArrayList<>();
 
     // ===== UTIL =====
-    private Scanner scan = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     // ===== CONSTRUCTOR =====
     public Menu() {
-        // Biar program langsung bisa dipakai tanpa harus input menu dulu
         if (daftarMenu.isEmpty()) {
             daftarMenu.add(new Menu("Ayam Original", 6000, 50));
             daftarMenu.add(new Menu("Ayam Crispy", 7000, 40));
@@ -69,8 +68,8 @@ public class Menu {
             System.out.println("4. Hapus Menu");
             System.out.println("0. Kembali");
             System.out.print("Pilih: ");
-            pilih = scan.nextInt();
-            scan.nextLine(); // buang enter
+            pilih = sc.nextInt();
+            sc.nextLine();
 
             switch (pilih) {
                 case 1:
@@ -99,99 +98,81 @@ public class Menu {
         System.out.println("=== TAMBAH MENU ===");
 
         System.out.print("Nama Menu : ");
-        String nama = scan.nextLine();
+        String nama = sc.nextLine();
 
         System.out.print("Harga     : ");
-        int harga = scan.nextInt();
+        int harga = sc.nextInt();
 
         System.out.print("Stok      : ");
-        int stok = scan.nextInt();
-        scan.nextLine(); // buang enter
+        int stok = sc.nextInt();
 
+        sc.nextLine();
         daftarMenu.add(new Menu(nama, harga, stok));
         System.out.println("Menu berhasil ditambahkan.");
     }
-
     // ===== READ =====
     private void readMenu() {
         System.out.println("=== DAFTAR MENU ===");
         lihatMenu();
     }
-
     // ===== UPDATE =====
     private void updateMenu() {
         System.out.println("=== UPDATE MENU ===");
         lihatMenu();
-
         if (daftarMenu.isEmpty()) {
             return;
         }
-
         System.out.print("Pilih index menu yang mau diupdate: ");
-        int idx = scan.nextInt();
-        scan.nextLine(); // buang enter
-
+        int idx = sc.nextInt();
+        sc.nextLine();
         Menu m = getMenu(idx);
         if (m == null) {
             System.out.println("Index tidak valid!");
             return;
         }
-
         System.out.print("Nama baru (" + m.getNamaMenu() + ") : ");
-        String namaBaru = scan.nextLine();
+        String namaBaru = sc.nextLine();
         if (!namaBaru.trim().isEmpty()) {
             m.setNamaMenu(namaBaru);
         }
-
         System.out.print("Harga baru (" + m.getHarga() + ") : ");
-        String hargaInput = scan.nextLine();
+        String hargaInput = sc.nextLine();
         if (!hargaInput.trim().isEmpty()) {
             m.setHarga(Integer.parseInt(hargaInput));
         }
-
         System.out.print("Stok baru (" + m.getStok() + ") : ");
-        String stokInput = scan.nextLine();
+        String stokInput = sc.nextLine();
         if (!stokInput.trim().isEmpty()) {
             m.setStok(Integer.parseInt(stokInput));
         }
-
         System.out.println("Menu berhasil diupdate.");
     }
-
     // ===== DELETE =====
     private void deleteMenu() {
         System.out.println("=== HAPUS MENU ===");
         lihatMenu();
-
         if (daftarMenu.isEmpty()) {
             return;
         }
-
         System.out.print("Pilih index menu yang mau dihapus: ");
-        int idx = scan.nextInt();
-        scan.nextLine(); // buang enter
-
+        int idx = sc.nextInt();
+        sc.nextLine();
         if (idx < 0 || idx >= daftarMenu.size()) {
             System.out.println("Index tidak valid!");
             return;
         }
-
         daftarMenu.remove(idx);
         System.out.println("Menu berhasil dihapus.");
     }
-
     // ===== RELASI KE TRANSAKSI =====
-    // Dipakai langsung oleh Transaksi.java
     public static void lihatMenu() {
         if (daftarMenu.isEmpty()) {
             System.out.println("Menu masih kosong.");
             return;
         }
-
         System.out.println("-----------------------------------------------");
-        System.out.println("Index | Nama Menu           | Harga   | Stok");
+        System.out.println("No | Nama Menu           | Harga   | Stok");
         System.out.println("-----------------------------------------------");
-
         for (int i = 0; i < daftarMenu.size(); i++) {
             Menu m = daftarMenu.get(i);
             System.out.printf(
@@ -199,10 +180,8 @@ public class Menu {
                 i, m.getNamaMenu(), m.getHarga(), m.getStok()
             );
         }
-
         System.out.println("-----------------------------------------------");
     }
-
     // Dipakai langsung oleh Transaksi.java
     public static Menu getMenu(int idx) {
         if (idx < 0 || idx >= daftarMenu.size()) {

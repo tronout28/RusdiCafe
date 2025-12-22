@@ -62,7 +62,7 @@ public class Transaksi {
 
     private void prosesPembelian() {
         Menu.lihatMenu();
-        System.out.print("Pilih index menu: ");
+        System.out.print("Pilih menu: ");
         int idx = scan.nextInt();
 
         Menu menu = Menu.getMenu(idx);

@@ -11,7 +11,8 @@ public class Menu {
     private int stok;
 
     // ===== STORAGE MENU =====
-    private static ArrayList<Menu> daftarMenu = new ArrayList<>();
+    // ✅ DIPERBAIKI: hapus 'private' agar bisa diakses oleh Laporan
+    static ArrayList<Menu> daftarMenu = new ArrayList<>();
 
     // ===== UTIL =====
     private Scanner sc = new Scanner(System.in);

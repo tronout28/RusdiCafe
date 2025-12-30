@@ -59,7 +59,7 @@ public class Main {
         System.out.println("=== MENU UTAMA ===");
         System.out.println("1. Kasir");
         System.out.println("2. Menu");
-        System.out.println("4. Laporan");
+        System.out.println("3. Laporan");
         System.out.println("0. Keluar");
         System.out.print("Pilih menu: ");
     }

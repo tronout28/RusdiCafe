@@ -1,6 +1,7 @@
 package App;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Transaksi {
@@ -10,7 +11,12 @@ public class Transaksi {
     private int subtotal;
     private static int totalPendapatan = 0;
 
-    private static ArrayList<Transaksi> daftarTransaksi = new ArrayList<>();
+    // Transaksi aktif (untuk satu sesi kasir)
+    static ArrayList<Transaksi> daftarTransaksi = new ArrayList<>();
+    
+    // Riwayat semua transaksi yang sudah dibayar
+    private static ArrayList<Transaksi> riwayatTransaksi = new ArrayList<>();
+
     private Scanner scan = new Scanner(System.in);
 
     public Transaksi() {}
@@ -20,6 +26,15 @@ public class Transaksi {
         this.qtyTerjual = qtyTerjual;
         this.subtotal = menuTerjual.getHarga() * qtyTerjual;
         totalPendapatan += this.subtotal;
+    }
+
+    // Getter untuk laporan (read-only copy)
+    public static List<Transaksi> getRiwayatTransaksi() {
+        return new ArrayList<>(riwayatTransaksi);
+    }
+
+    public static int getTotalPendapatan() {
+        return totalPendapatan;
     }
 
     public Menu getMenuTerjual() {
@@ -32,10 +47,6 @@ public class Transaksi {
 
     public int getSubtotal() {
         return subtotal;
-    }
-
-    public static int getTotalPendapatan() {
-        return totalPendapatan;
     }
 
     public void Kasir() {
@@ -130,6 +141,8 @@ public class Transaksi {
         System.out.println("Kembalian: Rp " + (bayar - total));
         System.out.println("Terima kasih!");
 
-        daftarTransaksi.clear();
+        // ✅ SIMPAN KE RIWAYAT, JANGAN LANGSUNG HAPUS!
+        riwayatTransaksi.addAll(daftarTransaksi);
+        daftarTransaksi.clear(); // bersihkan hanya untuk transaksi aktif
     }
 }

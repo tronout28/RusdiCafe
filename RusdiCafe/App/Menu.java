@@ -11,7 +11,8 @@ public class Menu {
     private int stok;
 
     // ===== STORAGE MENU =====
-    private static ArrayList<Menu> daftarMenu = new ArrayList<>();
+    // ✅ DIPERBAIKI: hapus 'private' agar bisa diakses oleh Laporan
+    static ArrayList<Menu> daftarMenu = new ArrayList<>();
 
     // ===== UTIL =====
     private Scanner scan = new Scanner(System.in);
@@ -181,7 +182,6 @@ public class Menu {
     }
 
     // ===== RELASI KE TRANSAKSI =====
-    // Dipakai langsung oleh Transaksi.java
     public static void lihatMenu() {
         if (daftarMenu.isEmpty()) {
             System.out.println("Menu masih kosong.");
@@ -203,7 +203,6 @@ public class Menu {
         System.out.println("-----------------------------------------------");
     }
 
-    // Dipakai langsung oleh Transaksi.java
     public static Menu getMenu(int idx) {
         if (idx < 0 || idx >= daftarMenu.size()) {
             return null;

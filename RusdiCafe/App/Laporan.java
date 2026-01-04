@@ -43,13 +43,13 @@ public class Laporan {
     }
 
     private void tampilkanRingkasanUmum() {
-        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi(); // ✅ BACA DARI RIWAYAT
+        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi();
         int totalTransaksi = riwayat.size();
         int totalPendapatan = Transaksi.getTotalPendapatan();
         int jumlahMenu = Menu.daftarMenu.size();
 
         int totalQtyTerjual = 0;
-        for (Transaksi t : riwayat) { // ✅ Iterasi riwayat
+        for (Transaksi t : riwayat) {
             totalQtyTerjual += t.getQtyTerjual();
         }
 
@@ -74,7 +74,7 @@ public class Laporan {
             pendapatanMap.put(m.getNamaMenu(), 0);
         }
 
-        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi(); // ✅
+        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi();
         for (Transaksi t : riwayat) {
             String nama = t.getMenuTerjual().getNamaMenu();
             int qty = t.getQtyTerjual();
@@ -96,7 +96,7 @@ public class Laporan {
     }
 
     private void tampilkanMenuTerlaris() {
-        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi(); // ✅
+        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi();
         if (riwayat.isEmpty()) {
             System.out.println("\nBelum ada transaksi.");
             return;
@@ -144,7 +144,7 @@ public class Laporan {
     }
 
     private void tampilkanSemuaTransaksi() {
-        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi(); // ✅
+        List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi();
         if (riwayat.isEmpty()) {
             System.out.println("\nBelum ada transaksi.");
             return;

@@ -11,10 +11,8 @@ public class Transaksi {
     private int subtotal;
     private static int totalPendapatan = 0;
 
-    // Transaksi aktif (untuk satu sesi kasir)
     static ArrayList<Transaksi> daftarTransaksi = new ArrayList<>();
     
-    // Riwayat semua transaksi yang sudah dibayar
     private static ArrayList<Transaksi> riwayatTransaksi = new ArrayList<>();
 
     private Scanner scan = new Scanner(System.in);
@@ -28,7 +26,6 @@ public class Transaksi {
         totalPendapatan += this.subtotal;
     }
 
-    // Getter untuk laporan (read-only copy)
     public static List<Transaksi> getRiwayatTransaksi() {
         return new ArrayList<>(riwayatTransaksi);
     }
@@ -141,8 +138,7 @@ public class Transaksi {
         System.out.println("Kembalian: Rp " + (bayar - total));
         System.out.println("Terima kasih!");
 
-        // ✅ SIMPAN KE RIWAYAT, JANGAN LANGSUNG HAPUS!
         riwayatTransaksi.addAll(daftarTransaksi);
-        daftarTransaksi.clear(); // bersihkan hanya untuk transaksi aktif
+        daftarTransaksi.clear():
     }
 }

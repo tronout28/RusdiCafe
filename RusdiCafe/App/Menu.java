@@ -5,19 +5,15 @@ import java.util.Scanner;
 
 public class Menu {
 
-    // ===== ATRIBUT =====
+ 
     private String namaMenu;
     private int harga;
     private int stok;
-
-    // ===== STORAGE MENU =====
-    // ✅ DIPERBAIKI: hapus 'private' agar bisa diakses oleh Laporan
+ 
     static ArrayList<Menu> daftarMenu = new ArrayList<>();
 
-    // ===== UTIL =====
     private Scanner sc = new Scanner(System.in);
 
-    // ===== CONSTRUCTOR =====
     public Menu() {
         if (daftarMenu.isEmpty()) {
             daftarMenu.add(new Menu("Ayam Original", 6000, 50));
@@ -33,7 +29,6 @@ public class Menu {
         this.stok = stok;
     }
 
-    // ===== GETTER & SETTER =====
     public String getNamaMenu() {
         return namaMenu;
     }
@@ -58,7 +53,6 @@ public class Menu {
         this.stok = stok;
     }
 
-    // ===== MENU CRUD =====
     public void menus() {
         int pilih;
         do {
@@ -94,7 +88,6 @@ public class Menu {
         } while (pilih != 0);
     }
 
-    // ===== CREATE =====
     private void createMenu() {
         System.out.println("=== TAMBAH MENU ===");
 
@@ -111,12 +104,12 @@ public class Menu {
         daftarMenu.add(new Menu(nama, harga, stok));
         System.out.println("Menu berhasil ditambahkan.");
     }
-    // ===== READ =====
+   
     private void readMenu() {
         System.out.println("=== DAFTAR MENU ===");
         lihatMenu();
     }
-    // ===== UPDATE =====
+  
     private void updateMenu() {
         System.out.println("=== UPDATE MENU ===");
         lihatMenu();
@@ -148,7 +141,7 @@ public class Menu {
         }
         System.out.println("Menu berhasil diupdate.");
     }
-    // ===== DELETE =====
+   
     private void deleteMenu() {
         System.out.println("=== HAPUS MENU ===");
         lihatMenu();
@@ -165,7 +158,7 @@ public class Menu {
         daftarMenu.remove(idx);
         System.out.println("Menu berhasil dihapus.");
     }
-    // ===== RELASI KE TRANSAKSI =====
+    
     public static void lihatMenu() {
         if (daftarMenu.isEmpty()) {
             System.out.println("Menu masih kosong.");
@@ -183,7 +176,7 @@ public class Menu {
         }
         System.out.println("-----------------------------------------------");
     }
-    // Dipakai langsung oleh Transaksi.java
+   
     public static Menu getMenu(int idx) {
         if (idx < 0 || idx >= daftarMenu.size()) {
             return null;

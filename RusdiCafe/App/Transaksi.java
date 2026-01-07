@@ -139,6 +139,6 @@ public class Transaksi {
         System.out.println("Terima kasih!");
 
         riwayatTransaksi.addAll(daftarTransaksi);
-        daftarTransaksi.clear():
+        daftarTransaksi.clear();
     }
 }

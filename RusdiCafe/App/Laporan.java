@@ -5,19 +5,21 @@ import java.util.*;
 public class Laporan {
 
     public void Laporan() {
-        System.out.println("\n=== LAPORAN TRANSAKSI ===");
-        System.out.println("1. Ringkasan Umum");
-        System.out.println("2. Penjualan per Menu");
-        System.out.println("3. Menu Terlaris");
-        System.out.println("4. Stok Saat Ini");
-        System.out.println("5. Detail Semua Transaksi");
-        System.out.println("0. Kembali");
-
         Scanner scan = new Scanner(System.in);
         int pilih;
+
         do {
+            System.out.println("\n=== LAPORAN TRANSAKSI ===");
+            System.out.println("1. Ringkasan Umum");
+            System.out.println("2. Penjualan per Menu");
+            System.out.println("3. Menu Terlaris");
+            System.out.println("4. Stok Saat Ini");
+            System.out.println("5. Detail Semua Transaksi");
+            System.out.println("0. Kembali");
+
             System.out.print("\nPilih laporan: ");
             pilih = scan.nextInt();
+
             switch (pilih) {
                 case 1:
                     tampilkanRingkasanUmum();
@@ -77,11 +79,8 @@ public class Laporan {
         List<Transaksi> riwayat = Transaksi.getRiwayatTransaksi();
         for (Transaksi t : riwayat) {
             String nama = t.getMenuTerjual().getNamaMenu();
-            int qty = t.getQtyTerjual();
-            int subtotal = t.getSubtotal();
-
-            qtyMap.put(nama, qtyMap.get(nama) + qty);
-            pendapatanMap.put(nama, pendapatanMap.get(nama) + subtotal);
+            qtyMap.put(nama, qtyMap.get(nama) + t.getQtyTerjual());
+            pendapatanMap.put(nama, pendapatanMap.get(nama) + t.getSubtotal());
         }
 
         System.out.println("\n--- PENJUALAN PER MENU ---");
@@ -89,9 +88,10 @@ public class Laporan {
         System.out.println("---------------------------------------------");
         for (Menu m : Menu.daftarMenu) {
             String nama = m.getNamaMenu();
-            int qty = qtyMap.get(nama);
-            int income = pendapatanMap.get(nama);
-            System.out.printf("%-20s | %-10d | Rp %-10d%n", nama, qty, income);
+            System.out.printf("%-20s | %-10d | Rp %-10d%n",
+                    nama,
+                    qtyMap.get(nama),
+                    pendapatanMap.get(nama));
         }
     }
 
@@ -106,17 +106,19 @@ public class Laporan {
         for (Menu m : Menu.daftarMenu) {
             qtyMap.put(m.getNamaMenu(), 0);
         }
+
         for (Transaksi t : riwayat) {
             String nama = t.getMenuTerjual().getNamaMenu();
             qtyMap.put(nama, qtyMap.get(nama) + t.getQtyTerjual());
         }
 
         String terlaris = "";
-        int maxQty = -1;
-        for (Map.Entry<String, Integer> entry : qtyMap.entrySet()) {
-            if (entry.getValue() > maxQty) {
-                maxQty = entry.getValue();
-                terlaris = entry.getKey();
+        int maxQty = 0;
+
+        for (Map.Entry<String, Integer> e : qtyMap.entrySet()) {
+            if (e.getValue() > maxQty) {
+                maxQty = e.getValue();
+                terlaris = e.getKey();
             }
         }
 
@@ -124,8 +126,8 @@ public class Laporan {
         if (maxQty == 0) {
             System.out.println("Belum ada penjualan.");
         } else {
-            System.out.println("Menu   : " + terlaris);
-            System.out.println("Terjual: " + maxQty + " item");
+            System.out.println("Menu    : " + terlaris);
+            System.out.println("Terjual : " + maxQty + " item");
         }
     }
 
@@ -156,11 +158,10 @@ public class Laporan {
         for (int i = 0; i < riwayat.size(); i++) {
             Transaksi t = riwayat.get(i);
             System.out.printf("%-2d | %-18s | %-3d | Rp %-8d%n",
-                (i + 1),
-                t.getMenuTerjual().getNamaMenu(),
-                t.getQtyTerjual(),
-                t.getSubtotal()
-            );
+                    i + 1,
+                    t.getMenuTerjual().getNamaMenu(),
+                    t.getQtyTerjual(),
+                    t.getSubtotal());
         }
     }
 }
